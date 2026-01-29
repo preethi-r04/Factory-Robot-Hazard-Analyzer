@@ -2,16 +2,16 @@ package factoryhazard;
 
 import java.util.Scanner;
 
-// UC7: Final integration and user-friendly output
+// UC8: Final cleanup and graceful termination
 public class FactoryRobotHazardAnalyzer {
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("====================================");
         System.out.println("   Factory Robot Hazard Analyzer");
         System.out.println("====================================");
-
-        Scanner scanner = new Scanner(System.in);
 
         try {
             // UC2: Accept inputs
@@ -38,24 +38,26 @@ public class FactoryRobotHazardAnalyzer {
                             machineryState
                     );
 
-            // UC7: User-friendly success output
+            // UC7: Success output
             System.out.println("------------------------------------");
             System.out.println("Hazard Analysis Completed Successfully");
-            System.out.println("Calculated Hazard Risk Score : " + hazardRiskScore);
+            System.out.println("Final Hazard Risk Score : " + hazardRiskScore);
             System.out.println("------------------------------------");
 
         } catch (InvalidHazardInputException e) {
-            // UC7: User-friendly error output
+            // UC7: Error output
             System.out.println("------------------------------------");
             System.out.println("Hazard Analysis Failed");
             System.out.println(e.getMessage());
             System.out.println("------------------------------------");
+        } finally {
+            // UC8: Graceful cleanup
+            scanner.close();
+            System.out.println("Program execution completed.");
         }
-
-        scanner.close();
     }
 
-    // UC5: Validation logic (unchanged)
+    // UC5: Validation logic
     private static void validateInputs(double armPrecision,
                                        int workerDensity,
                                        String machineryState)
@@ -84,7 +86,7 @@ public class FactoryRobotHazardAnalyzer {
 }
 
 /*
- * UC6: Auditor class (unchanged)
+ * Hazard calculation logic (UC6)
  */
 class RobotHazardAuditor {
 
@@ -101,4 +103,5 @@ class RobotHazardAuditor {
         return riskScore;
     }
 }
+
 
